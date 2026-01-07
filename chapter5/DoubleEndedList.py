@@ -9,6 +9,11 @@ class DoubleEndedList(LinkedList):
     def getFirst(self):
         return self.__first
 
+    def first(self):
+        if self.isEmpty():
+            raise Exception("No first element in empty list")
+        return self.__first.getData()
+
     def getLast(self):
         return self.__last
 
@@ -25,7 +30,7 @@ class DoubleEndedList(LinkedList):
             raise Exception("No last element in empty list")
         return self.__last.getData()
 
-    def insetLast(self, datum):
+    def insertLast(self, datum):
         if self.isEmpty():
             return self.insert(datum)
         link = Link(datum)
