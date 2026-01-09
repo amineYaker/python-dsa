@@ -45,16 +45,12 @@ class LinkedList(object):
             return None
 
     def setNext(self, link):
+        """Synonym of setFirst() to facilitate list manipulations  in which
+        either the __first pointer of the list or the __next pointer of a
+        link object is updated depending on the context.
         """
-        Inserts at the back of the list
-        """
-        if self.__first is not None:
-            current = self.__first
-            while current.getNext() is not None:
-                current = current.getNext()
-            current.setNext(link)
-        else:
-            raise Exception("Cannot set next link because the list is empty")
+        print("setNext called", "link:", link)
+        self.setFirst(link)
 
     def isEmpty(self):
         return self.getFirst() is None
