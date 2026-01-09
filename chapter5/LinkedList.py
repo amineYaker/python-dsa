@@ -102,8 +102,6 @@ class LinkedList(object):
         link = self.find(goal, key)
         if link is not None:
             return link.getData()
-        else:
-            return None
 
     def insertAfter(self, goal, datum, key=lambda x: x):
         link = self.find(goal, key)
@@ -138,3 +136,29 @@ class LinkedList(object):
                     return link.getData()
                 previous = link
             raise Exception("No item with matching key found in list")
+
+    class __ListIterator(object):
+        def __init__(self, llist):
+            self._llist = llist
+            self._next = llist.getNext()
+
+        def next(self):
+            if self._next is None:
+                raise StopIteration
+            else:
+                item = self._next.getData()
+                self._next = self._next.getNext()
+                return item
+
+        def has_more(self):
+            return self._next is not None
+
+    def iterator(self):
+        return LinkedList.__ListIterator(self)
+
+    ##using a generator to iterate through the linked list
+    def __iter__(self):
+        next = self.getFirst()
+        while next is not None:
+            yield next.getData()
+            next = next.getNext()
